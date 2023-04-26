@@ -1,5 +1,5 @@
 const express = require('express');
-
+// inicia o projeto
 const app = express();
 
 // não remova esse endpoint, é para o avaliador funcionar
