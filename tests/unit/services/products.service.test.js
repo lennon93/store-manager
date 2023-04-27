@@ -24,11 +24,11 @@ describe('Testes de unidade do service de produtos', function () {
     expect(result.message).to.be.deep.equal(productById);
   });
   it('Id inválido', async function () {
-    sinon.stub(productModel, 'getById').resolves([]);
+    sinon.stub(productModel, 'getById').resolves();
     const productIdWrong = 999;
     const result = await productService.getById(productIdWrong);
 
     expect(result.type).to.equal('PRODUCT_NOT_FOUND');
-    expect(result.message.message).to.be.deep.equal('Product not found');
+    expect(result.message).to.be.deep.equal('Product not found');
   });
 });
