@@ -15,7 +15,7 @@ describe('Testes de unidade do model de produtos', function () {
     expect(result).to.be.deep.equal(products);
   });
   it('Buscando produto pelo id', async function () {
-    sinon.stub(connection, 'execute').resolves([productById]);
+    sinon.stub(connection, 'execute').resolves([[productById]]);
     const productId = 1;
     const result = await productModel.getById(productId);
 
