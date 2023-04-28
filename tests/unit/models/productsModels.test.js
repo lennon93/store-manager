@@ -21,4 +21,12 @@ describe('Testes de unidade do model de produtos', function () {
 
     expect(result).to.be.deep.equal(productById);
   });
+  it('Adicionando um novo produto', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 42 }]);
+    const newProduct = 'Armadura do Iron Man';
+    const result = await productModel.insertProduct(newProduct);
+
+    expect(result).to.equal(42);
+  });
+
 });

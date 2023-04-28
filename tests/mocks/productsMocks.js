@@ -19,7 +19,13 @@ productById = [
   }
 ];
 
+newProductMock = {
+  id: 42,
+  name: 'Armadura do Iron Man'
+}
+
 module.exports = {
   allProductsMock,
   productById,
+  newProductMock,
 };
