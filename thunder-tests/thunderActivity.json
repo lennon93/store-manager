@@ -18,16 +18,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/",
-    "url": "http://localhost:3001/sales/1",
-    "method": "GET",
+    "url": "http://localhost:3001/products/1",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2023-04-27T00:36:15.596Z",
-    "modified": "2023-04-29T05:53:33.103Z",
+    "modified": "2023-04-29T07:22:46.157Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 7,\n    \"quantity\": 5\n  }\n]",
+      "raw": "{\n  \"name\": \"Martelo do hulk\"\n}",
       "form": []
     },
     "tests": []
