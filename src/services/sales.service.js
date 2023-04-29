@@ -7,16 +7,15 @@ const getAllSales = async () => {
 
 const insertSales = async (products) => {
     const date = new Date();
-  const id = await salesModel.insertSales(date);
+  const saleId = await salesModel.insertSales(date);
   
   const promises = products.map(async ({ productId, quantity }) => {
-    await salesModel.insertSalesProducts(id, productId, quantity);
+    await salesModel.insertSalesProducts(saleId, productId, quantity);
   });
 
   await Promise.all(promises);
 
-  const result = id;
-  return result;
+  return saleId;
 };
 
 module.exports = {
