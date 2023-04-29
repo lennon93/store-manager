@@ -2,12 +2,7 @@ const { salesService } = require('../services');
 
 const insertSales = async (req, res) => {
   const products = req.body;
-  const saleId = await salesService.insertSales(products);
-
-  const result = {
-    id: saleId,
-    itemsSold: products,
-  };
+  const result = await salesService.insertSales(products);
 
   return res.status(201).json(result);
 };

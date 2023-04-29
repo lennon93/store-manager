@@ -15,7 +15,12 @@ const insertSales = async (products) => {
 
   await Promise.all(promises);
 
-  return saleId;
+  const result = {
+    id: saleId,
+    itemsSold: products,
+  };
+
+  return result;
 };
 
 module.exports = {
