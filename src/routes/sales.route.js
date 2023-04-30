@@ -4,9 +4,10 @@ const { productIdValidation, quantityValidation } = require('../middlewares/vali
 
 const router = Router();
 
-router.post('/', quantityValidation, productIdValidation, salesController.insertSales);
 router.get('/:id', salesController.getSalesById);
-router.get('/', salesController.getAllSales);
 router.delete('/:id', salesController.deleteSales);
+router.put('/:id', quantityValidation, productIdValidation, salesController.updateSales);
+router.post('/', quantityValidation, productIdValidation, salesController.insertSales);
+router.get('/', salesController.getAllSales);
 
 module.exports = router;
