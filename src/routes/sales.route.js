@@ -7,5 +7,6 @@ const router = Router();
 router.post('/', quantityValidation, productIdValidation, salesController.insertSales);
 router.get('/:id', salesController.getSalesById);
 router.get('/', salesController.getAllSales);
+router.delete('/:id', salesController.deleteSales);
 
 module.exports = router;
