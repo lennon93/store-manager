@@ -4,6 +4,7 @@ const { nameValidation } = require('../middlewares/validationProduct');
 
 const router = Router();
 
+router.get('/search', productController.searchProduct);
 router.post('/', nameValidation, productController.insertProduct);
 router.get('/', productController.getAll);
 router.get('/:id', productController.getById);

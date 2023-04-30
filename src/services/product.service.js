@@ -34,10 +34,33 @@ const deleteProduct = async (id) => {
   return { type: null, message: null };
 };
 
+const searchProduct = async (q) => {
+  const { message } = await getAll();
+  const searchName = message
+    .filter((product) => product.name.toUpperCase().includes(q.toUpperCase()));
+
+  const names = Object.values(searchName);
+  const columns = names.map(({ name }) => name);
+  const resultProducts = [];
+  const promises = columns.map(
+    async (name) => {
+      const product = await productModel.searchProduct(name);
+      return resultProducts.push(product);
+    },
+  );
+
+  await Promise.all(promises);
+
+  console.log(resultProducts);
+
+  return resultProducts;
+};
+
 module.exports = {
   getAll,
   getById,
   insertProduct,
   updateProduct,
   deleteProduct,
+  searchProduct,
 };

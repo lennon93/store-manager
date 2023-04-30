@@ -18,18 +18,19 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/",
-    "url": "http://localhost:3001/sales/1",
-    "method": "PUT",
+    "url": "http://localhost:3001/products/search?q=Mé",
+    "method": "GET",
     "sortNum": 0,
     "created": "2023-04-27T00:36:15.596Z",
-    "modified": "2023-04-30T06:59:57.988Z",
+    "modified": "2023-04-30T17:25:48.567Z",
     "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 11\n  },\n  {\n    \"productId\": 3,\n    \"quantity\": 50\n  }\n]",
-      "form": []
-    },
+    "params": [
+      {
+        "name": "q",
+        "value": "Mé",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]
