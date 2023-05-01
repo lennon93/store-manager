@@ -18,19 +18,13 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3001/",
-    "url": "http://localhost:3001/products/search?q=Mé",
+    "url": "http://localhost:3001/sales/1",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-04-27T00:36:15.596Z",
-    "modified": "2023-04-30T17:25:48.567Z",
+    "modified": "2023-05-01T19:54:41.156Z",
     "headers": [],
-    "params": [
-      {
-        "name": "q",
-        "value": "Mé",
-        "isPath": false
-      }
-    ],
+    "params": [],
     "tests": []
   }
 ]

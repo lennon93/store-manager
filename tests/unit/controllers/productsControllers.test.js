@@ -73,4 +73,43 @@ describe('Testes de unidade do controller de produtos', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(newProductMock);
   });
+  // it('Update em um novo produto', async function () {
+  //   const res = {};
+  //   const req = {
+  //     body: { name: newProductMock.name },
+  //     params: { id: 1 },
+  //   };
+  //   const id = 1;
+
+  //   res.status = sinon.stub().returns(res);
+  //   res.json = sinon.stub().returns();
+  //   sinon.stub(productService, 'updateProduct').resolves(
+  //     { type: null, message: { id, name: newProductMock.name } }
+  //   );
+
+  //   await productController.updateProduct(req, res);
+
+  //   expect(res.status).to.have.been.calledWith(200);
+  //   expect(res.json).to.have.been.calledWith(
+  //     { message: { id, name: newProductMock.name } }
+  //   );
+  // });
+  it('Id inválido no update do produto', async function () {
+    const res = {};
+    const req = {
+      params: { id: 99 },
+      body: { name: newProductMock.name },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productService, 'updateProduct').resolves(
+      { type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } }
+    );
+
+    await productController.updateProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
 });
