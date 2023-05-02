@@ -51,8 +51,6 @@ const searchProduct = async (q) => {
 
   await Promise.all(promises);
 
-  console.log(resultProducts);
-
   return resultProducts;
 };
 

@@ -56,6 +56,20 @@ newSalesMock = [
   }
 ];
 
+newSalesUpdated = {
+  "saleId": 1,
+  "itemsUpdated": [
+    {
+      "productId": 1,
+      "quantity": 10
+    },
+    {
+      "productId": 2,
+      "quantity": 50
+    }
+  ]
+};
+
 newSalesServiceMock = {
   "id": 3,
   "itemsSold": [
@@ -70,10 +84,20 @@ newSalesServiceMock = {
   ]
 };
 
+const correctId = 1;
+
+const incorrectId = 999;
+
+const notFound = { type: 'SALE_NOT_FOUND', message: { message: 'Sale not found' } };
+
 module.exports = {
   allSales,
   salesById,
   newSales,
   newSalesMock,
   newSalesServiceMock,
+  correctId,
+  incorrectId,
+  newSalesUpdated,
+  notFound,
 };

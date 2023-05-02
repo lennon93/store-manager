@@ -1,4 +1,4 @@
-allProductsMock = [
+const allProductsMock = [
   {
     "id": 1,
     "name": "Martelo de Thor"
@@ -12,20 +12,39 @@ allProductsMock = [
     "name": "Escudo do Capitão América"
   }
 ];
-productById = [  
+
+const productResearched = [  
   {
-    "id": 1,
-      "name": "Martelo de Thor"
+    id: 1,
+    name: "Martelo de Thor"
   }
 ];
 
-newProductMock = {
+const newProductMock = {
   id: 42,
   name: 'Armadura do Iron Man'
-}
+};
+
+const updatedProduct = {
+  id: 1,
+  name: 'Armadura do Iron Man',
+};
+
+const newProduct = 'Armadura do Iron Man';
+
+const correctId = 1;
+
+const incorrectId = 999;
+
+const notFound = { type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } };
 
 module.exports = {
   allProductsMock,
-  productById,
+  productResearched,
   newProductMock,
+  newProduct,
+  correctId,
+  incorrectId,
+  updatedProduct,
+  notFound,
 };

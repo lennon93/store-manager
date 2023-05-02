@@ -33,14 +33,14 @@ const insertSales = async (products) => {
 const deleteSales = async (id) => {
   const result = await salesModel.deleteSales(id);
 
-  if (!result) return { type: 'SALES_NOT_FOUND', message: { message: 'Sale not found' } };
+  if (!result) return { type: 'SALE_NOT_FOUND', message: { message: 'Sale not found' } };
 
   return { type: null, message: null };
 };
 
 const updateSales = async (saleId, itemsUpdated) => {
   const { type } = await getSalesById(saleId);
-  if (type) return { type: 'SALES_NOT_FOUND', message: { message: 'Sale not found' } };
+  if (type) return { type: 'SALE_NOT_FOUND', message: { message: 'Sale not found' } };
   const promises = itemsUpdated.map(async ({ productId, quantity }) => {
     await salesModel.updateSales(saleId, productId, quantity);
   });

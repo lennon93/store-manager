@@ -4,7 +4,10 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const { salesController } = require('../../../src/controllers');
 const { salesService } = require('../../../src/services');
-const { salesById, allSales, newSales, newSalesMock, newSalesServiceMock } = require('../../mocks/salesMock');
+const {
+  salesById, allSales, newSales, newSalesMock, notFound,
+  newSalesServiceMock, correctId, newSalesUpdated, incorrectId,
+} = require('../../mocks/salesMock');
 
 chai.use(sinonChai);
 
@@ -29,7 +32,7 @@ describe('Testes de unidade do controller de sales', function () {
   it('Buscando sales pelo id', async function () {
     const res = {};
     const req = {
-      params: { id: 1 },
+      params: { id: correctId },
     };
 
     res.status = sinon.stub().returns(res);
@@ -44,19 +47,17 @@ describe('Testes de unidade do controller de sales', function () {
   it('Id inválido na busca pelo id', async function () {
     const res = {};
     const req = {
-      params: { id: 99 },
+      params: { id: incorrectId },
     };
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    sinon.stub(salesService, 'getSalesById').resolves(
-      { type: 'SALES_NOT_FOUND', message: { message: 'Sale not found' } }
-    );
+    sinon.stub(salesService, 'getSalesById').resolves(notFound);
 
     await salesController.getSalesById(req, res);
 
     expect(res.status).to.have.been.calledWith(404);
-    expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
+    expect(res.json).to.have.been.calledWith(notFound.message);
   });
   it('Adiciona uma nova sale', async function () {
     const res = {};
@@ -73,59 +74,66 @@ describe('Testes de unidade do controller de sales', function () {
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(newSalesServiceMock);
   });
-  // it('Update em um novo produto', async function () {
-  //   const res = {};
-  //   const req = {
-  //     body: { name: newProductMock.name },
-  //     params: { id: 1 },
-  //   };
-  //   const id = 1;
-
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
-  //   sinon.stub(productService, 'updateProduct').resolves(
-  //     { type: null, message: { id, name: newProductMock.name } }
-  //   );
-
-  //   await productController.updateProduct(req, res);
-
-  //   expect(res.status).to.have.been.calledWith(200);
-  //   expect(res.json).to.have.been.calledWith(
-  //     { message: { id, name: newProductMock.name } }
-  //   );
-  // });
-  // it('Id inválido no update da sale', async function () {
-  //   const res = {};
-  //   const req = {
-  //     params: { id: 99 },
-  //     body: { name: newProductMock.name },
-  //   };
-
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
-  //   sinon.stub(salesService, 'updateSales').resolves(
-  //     { type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } }
-  //   );
-
-  //   await salesController.updateSales(req, res);
-
-  //   expect(res.status).to.have.been.calledWith(404);
-  //   expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-  // });
-  it('Deleta uma sale', async function () {
+  it('Update uma nova venda', async function () {
     const res = {};
     const req = {
-      params: { id: 1 },
+      body: newSales,
+      params: { id: correctId },
+    };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(salesService, 'updateSales').resolves(
+      { type: null, message: newSalesUpdated }
+    );
+
+    await salesController.updateSales(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(newSalesUpdated);
+  });
+  it('Id inválido no update de uma venda', async function () {
+    const res = {};
+    const req = {
+      params: { id: incorrectId },
     };
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
-    const idDeleted = 1;
-    sinon.stub(salesService, 'deleteSales').resolves(idDeleted);
+    sinon.stub(salesService, 'updateSales').resolves(notFound);
+
+    await salesController.updateSales(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith(notFound.message);
+  });
+  it('Deleta uma venda', async function () {
+    const res = {};
+    const req = {
+      params: { id: correctId },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(salesService, 'deleteSales').resolves(correctId);
 
     await salesController.deleteSales(req, res);
 
     expect(res.status).to.have.been.calledWith(204);
     expect(res.json).to.have.been.calledWith();
+  });
+  it('Id inválido no delete de uma venda', async function () {
+    const res = {};
+    const req = {
+      params: { id: incorrectId },
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(salesService, 'deleteSales').resolves(notFound);
+
+    await salesController.deleteSales(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith(notFound.message);
   });
 });
