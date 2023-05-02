@@ -38,4 +38,12 @@ describe('Testes de unidade do service de produtos', function () {
 
     expect(result.id).to.equal(42);
   });
+  it('Deleta um produto', async function () {
+    sinon.stub(productModel, 'deleteProduct').resolves([{ affectedRows: 1 }]);
+    const productId = 1;
+    const result = await productService.deleteProduct(productId);
+
+    expect(result.type).to.equal(null);
+    expect(result.message).to.equal(null);
+  });
 });

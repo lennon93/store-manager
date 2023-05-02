@@ -32,7 +32,48 @@ salesById = [
   }
 ];
 
+newSales = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 2,
+    "quantity": 5
+  }
+];
+
+newSalesMock = [
+  {
+    "saleId": 3,
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "saleId": 3,
+    "productId": 2,
+    "quantity": 5
+  }
+];
+
+newSalesServiceMock = {
+  "id": 3,
+  "itemsSold": [
+    {
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "productId": 2,
+      "quantity": 5
+    }
+  ]
+};
+
 module.exports = {
   allSales,
   salesById,
+  newSales,
+  newSalesMock,
+  newSalesServiceMock,
 };

@@ -28,5 +28,12 @@ describe('Testes de unidade do model de produtos', function () {
 
     expect(result).to.equal(42);
   });
+  it('Deletando um produto', async function () {
+    sinon.stub(connection, 'execute').resolves([{ affectedRows: 1 }]);
+    const idDeleted = 1;
+    const result = await productModel.deleteProduct(idDeleted);
+
+    expect(result).to.equal(1);
+  });
 
 });
